@@ -2,12 +2,16 @@
     max-width: 1225px;
     margin: 0 auto;
 }
+.wrapper {
+    margin: 0 auto;
+    max-width: 1340px;
+}
 .header {
 }
 .header__inner {
     display: flex;
     justify-content: space-between;
-    margin-top: 54px;
+    padding-top: 40px;
 }
 .header__title {
     color: rgb(24, 24, 24);
@@ -38,6 +42,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     width: 150px;
     height: 50px;
     border: 0px;
@@ -89,23 +94,30 @@
     display: flex;
 
     column-gap: 8.95px;
-	& li
-	{
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 46px;
-		padding: 0 32px;
-		border: 0px;
-		border-radius: 30px;
-		height: 46px;
-		background: rgb(249, 249, 249);
-		font-family: Nunito;
+    & li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        height: 46px;
+        padding: 0 32px;
+        border: 0px;
+        border-radius: 30px;
+        height: 46px;
+        background-color: rgb(249, 249, 249);
+        font-family: Nunito;
         font-size: 16px;
         font-weight: 700;
         line-height: 22px;
         letter-spacing: 1.5%;
-	}
+        // &:hover {
+        //     background-color: #282828;
+        //     color: #fff;
+
+        //     transition: 0.3s fill;
+        // }
+        
+    }
 }
 
 .sort__variables {
@@ -119,11 +131,11 @@
 }
 .sort__text {
 }
-.sort__svg{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-right: 7px;
+.sort__svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 7px;
 }
 .pizza__title {
     color: rgb(0, 0, 0);
@@ -133,14 +145,14 @@
     line-height: 44px;
     letter-spacing: 1%;
 
-	margin-top: 32px;
+    margin-top: 32px;
 }
-.pizza__inner{
-	margin-top: 31px;
-	display: flex;
-	column-gap: 35px;
-	row-gap: 65px;
-	flex-wrap: wrap;
+.pizza__inner {
+    margin-top: 31px;
+    display: flex;
+    column-gap: 35px;
+    row-gap: 65px;
+    flex-wrap: wrap;
 }
 .card__ellipse {
     display: flex;
@@ -196,7 +208,6 @@
     font-weight: 700;
     line-height: 19px;
     padding: 7px 4.76px;
-
     background: rgb(243, 243, 243);
 }
 .card__dough {
@@ -204,7 +215,7 @@
 
     justify-content: center;
     align-items: center;
-	column-gap: 7px;
+    column-gap: 7px;
 
     & li {
         width: 131.88px;
@@ -212,11 +223,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
+		&:hover {
+			background-color: #c5c4c4;
+			border-radius: 5px;
+			cursor: pointer;
+		}
     }
-}
-.card__item {
-    justify-content: center;
-    align-items: center;
 }
 
 .card__diameter {
@@ -224,7 +236,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 7px;
-	column-gap: 7px;
+    column-gap: 7px;
 
     & li {
         display: flex;
@@ -232,16 +244,19 @@
         align-items: center;
         width: 86.01px;
         height: 32px;
-		
+        &:hover {
+            background-color: #c5c4c4;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     }
 }
 .card__down {
-	
     display: flex;
     align-items: center;
-	justify-content: space-between;
+    justify-content: space-between;
     margin-top: 17px;
-	width: 280px;
+    width: 280px;
 }
 .card__price {
     width: 93px;
@@ -263,6 +278,33 @@
     border: 1px solid rgb(235, 90, 30);
     border-radius: 30px;
     background: rgb(255, 255, 255);
+    fill: #fff;
+    cursor: pointer;
+    & svg {
+        width: 12px;
+        height: 12px;
+        fill: white;
+        transition: fill 0.3s;
+    }
+
+    &:hover {
+        background-color: rgb(235, 90, 30);
+        transition: ease 0.25s;
+        & .card__text {
+            color: #fff;
+        }
+        svg {
+            path {
+                fill: #fff;
+            }
+        }
+        & .card__ellipse {
+            background-color: #fff;
+        }
+        & .card__count {
+            color: rgb(235, 90, 30);
+        }
+    }
 }
 
 .card__param {
@@ -280,4 +322,16 @@
     line-height: 19px;
     padding: 7px 4.76px;
     background: rgb(243, 243, 243);
+}
+
+.active {
+	background: #282828 !important;
+	color: #fff;
+}
+.selected {
+	background: #fff !important;
+	border-radius: 5px;
+	-webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.35);
+	-moz-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.35);
+	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
