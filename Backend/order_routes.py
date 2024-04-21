@@ -17,20 +17,17 @@ async def create_order(order: OrderModel):
     if len(pizzas) != len(order.pizza):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Одна или несколько пицц не существуют в базе данных")
 
-    new_order = Order(order_status='IN-PROCESS')
+    new_order = Order(order_status='inprocess')
     session.add(new_order)
     session.commit()
     session.refresh(new_order)
-
     for pizza in pizzas:
         new_order.pizza.append(pizza)
 
     session.commit()
-
     order_info = [{
         "pizzaname": pizza.pizzaname
     } for pizza in new_order.pizza]
-
     response = {
         "order_id": new_order.id,
         "order_status": new_order.order_status,

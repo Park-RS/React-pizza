@@ -1,9 +1,10 @@
 
-from sqlalchemy import Column,Integer,Text,String,ForeignKey, DateTime, Table
-from sqlalchemy_utils.types import ChoiceType
-from sqlalchemy.orm import relationship, declarative_base
+from sqlalchemy import Column,Integer,ForeignKey,Table, String, ARRAY
+from sqlalchemy.orm import relationship, declarative_base, Mapped, mapped_column
 from sqlalchemy.sql import func
-
+import enum
+from datetime import datetime
+from typing import List
 Base=declarative_base()
 
 order_pizza_association = Table(
@@ -16,25 +17,50 @@ order_pizza_association = Table(
 class Pizza(Base):
 
     __tablename__='pizza'
-    id=Column(Integer,primary_key=True)
-    pizzaname=Column(String(25), unique=True)
-    price=Column(Integer, default=250)
-    description=Column(Text,nullable=True) 
+    id: Mapped[int]=mapped_column(primary_key=True)
+    pizzaname:Mapped[str]=mapped_column(unique=True)
+    price:Mapped[float]
+    description:Mapped[str | None]=mapped_column(nullable=True)
+    image: Mapped[str]
+    sizes: Mapped[str]=mapped_column(ARRAY(String))
+    rating:Mapped[int]=mapped_column(nullable=True)
+    category_name= Column(String, ForeignKey("category.title"))
+
 
     orders = relationship('Order', secondary=order_pizza_association, back_populates='pizza')
+    category=relationship('Category', back_populates='cat_pizza')
+    
+    def __str__(self) -> str:
+        return self.pizzaname
+
+class Category(Base):
+    __tablename__='category'
+    id: Mapped[int]=mapped_column(primary_key=True)
+    title:Mapped[str]=mapped_column(unique=True)
+
+    cat_pizza=relationship('Pizza', back_populates='category')
+
+    def __str__(self) -> str:
+        return self.title
 
 
+class Statuses(enum.Enum):
+    inprocess="inprocess"
+    transit="transit"
+    delivered="delivered"
+    
     
 class Order(Base):
-    ORDER_STATUSES=(
-        ('IN-PROCESS','in-process'),('TRANSIT','transit'),('DELIVERED', 'delivered')
-    )
     __tablename__ = 'orders'
-    id = Column(Integer, primary_key=True)
-    name = Column(DateTime, default=func.now())
-    order_status = Column(ChoiceType(choices=ORDER_STATUSES))
+    id : Mapped[int]=mapped_column(primary_key=True)
+    name:Mapped[datetime]=mapped_column(default=func.now())
+    order_status :Mapped[Statuses]
 
     pizza = relationship('Pizza', secondary=order_pizza_association, back_populates='orders')
+
+    def __str__(self) -> str:
+        return self.name
+
 
 
 
