@@ -21,7 +21,7 @@ export default function Card({ title, price, image, sizes, types }) {
             <div className="card__param">
                 <ul className="card__dough">
                     {types.map((type) => (
-                        <li onClick={() => pickType(type)} className={selectType === type ? 'selected' : ''}>{typesAr[type]}</li>
+                        <li key={type} onClick={() => pickType(type)} className={selectType === type ? 'selected' : ''}>{typesAr[type]}</li>
                     ))}
 
                     {/* <li className="card__item card__active">тонкое</li>
@@ -30,7 +30,7 @@ export default function Card({ title, price, image, sizes, types }) {
 
                 <ul className="card__diameter">
                     {sizes.map((size) => (
-                        <li onClick={() => setSelectSize(size)} className={selectSize === size ? 'selected' : ''}>
+                        <li key={size} onClick={() => setSelectSize(size)} className={selectSize === size ? 'selected' : ''}>
                             {size} см
                         </li>
                     ))}

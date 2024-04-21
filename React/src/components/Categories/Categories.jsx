@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import triangle from '../../assets/triangle.svg';
+import Sort from '../Sort/Sort';
 export default function Categories(params) {
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -14,13 +15,13 @@ export default function Categories(params) {
                 <div className="sort__inner">
                     <ul className="sort__buttons">
                         {categories.map((value, index) => (
-                            <li onClick={() => chooseCategory(index)} className={activeIndex === index ? 'active' : ''}>
+                            <li key={index} onClick={() => chooseCategory(index)} className={activeIndex === index ? 'active' : ''}>
                                 {value}
                             </li>
                         ))}
                     </ul>
-
-                    <div className="sort__variables">
+					<Sort></Sort>
+                    {/* <div className="sort__variables">
                         <div className="sort__svg">
                             <img src={triangle} alt="" />
                         </div>
@@ -28,7 +29,7 @@ export default function Categories(params) {
                         <div className="sort__text">
                             Сортировка по: <span>популярности</span>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

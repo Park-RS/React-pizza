@@ -10,7 +10,7 @@ export default function Header(params) {
                             <img src={image1} alt="logo" />
                         </div>
                         <div className="header__info">
-                            <h3 className="header__title">REACT PIZZA</h3>
+                            <h3 className="header__title">Pizza Time</h3>
                             <p className="header__text">самая вкусная пицца во вселенной</p>
                         </div>
                     </div>
