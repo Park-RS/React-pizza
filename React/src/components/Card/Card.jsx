@@ -6,14 +6,28 @@ import pizzas from '../../assets/pizzas.json';
 export default function Card({ title, price, image, sizes, types }) {
     const typesAr = ['Тонкое', 'Традиционное'];
     const [selectType, setSelectType] = useState('');
-	const [selectSize, setSelectSize] = useState('');
+    const [selectSize, setSelectSize] = useState('');
     const [addPizza, setAddPizza] = useState(0);
     const addButton = () => {
         setAddPizza(addPizza + 1);
     };
     const pickType = (index) => {
-        setSelectType(index);
+        if (selectType === index) {
+            setSelectType(null);
+        } else {
+            setSelectType(index);
+        }
     };
+	const pickSize = (index) => 
+	{
+		if (selectSize === index) {
+			setSelectSize(null)
+		}
+		else 
+		{
+			setSelectSize(index)
+		}
+	}
     return (
         <div className="card">
             <img src={image} alt="" />
@@ -21,16 +35,18 @@ export default function Card({ title, price, image, sizes, types }) {
             <div className="card__param">
                 <ul className="card__dough">
                     {types.map((type) => (
-                        <li key={type} onClick={() => pickType(type)} className={selectType === type ? 'selected' : ''}>{typesAr[type]}</li>
+                        <li key={type} onClick={() => pickType(type)} className={selectType === type ? 'selected' : ''}>
+                            {typesAr[type]}
+                        </li>
                     ))}
-
-                    {/* <li className="card__item card__active">тонкое</li>
-                    <li className="card__item card__active">традиционное</li> */}
                 </ul>
 
                 <ul className="card__diameter">
                     {sizes.map((size) => (
-                        <li key={size} onClick={() => setSelectSize(size)} className={selectSize === size ? 'selected' : ''}>
+                        <li
+                            key={size}
+                            onClick={() => pickSize(size)}
+                            className={selectSize === size ? 'selected' : ''}>
                             {size} см
                         </li>
                     ))}
