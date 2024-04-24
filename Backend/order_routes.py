@@ -17,7 +17,13 @@ async def create_order(order: OrderModel):
     if len(pizzas) != len(order.pizza):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Одна или несколько пицц не существуют в базе данных")
 
-    new_order = Order(order_status='inprocess')
+    new_order = Order(
+         phone=order.phone,
+         name=order.name,
+         email=order.email,
+         comment=order.comment,
+         order_status='inprocess'
+         )
     session.add(new_order)
     session.commit()
     session.refresh(new_order)
@@ -33,7 +39,7 @@ async def create_order(order: OrderModel):
         "order_status": new_order.order_status,
         "order_info": order_info
     }
-    return jsonable_encoder(response)
+    return response
 
 @order_router.get('/orders')
 async def list_all_orders():
@@ -50,6 +56,7 @@ async def get_order_by_id(id:int):
      pizza_info = [{"pizzaname": pizza.pizzaname} for pizza in order.pizza]
      order_info = {
          "id": order.id,
+         "phone":order.phone,
          "name": order.name,
          "order_status": order.order_status,
          "pizza": pizza_info
