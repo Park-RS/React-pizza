@@ -5,6 +5,10 @@ from fastapi import UploadFile, File, Form
 
 class OrderModel(BaseModel):
     id:Optional[int]
+    phone: str="79538914495"
+    name: str
+    email:Optional[str]
+    comment:Optional[str]
     order_status:str="inprocess"
     pizza:List[str]
     

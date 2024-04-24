@@ -1,9 +1,7 @@
 
 from sqlalchemy import Column,Integer,ForeignKey,Table, String, ARRAY
 from sqlalchemy.orm import relationship, declarative_base, Mapped, mapped_column
-from sqlalchemy.sql import func
 import enum
-from datetime import datetime
 from typing import List
 Base=declarative_base()
 
@@ -53,7 +51,11 @@ class Statuses(enum.Enum):
 class Order(Base):
     __tablename__ = 'orders'
     id : Mapped[int]=mapped_column(primary_key=True)
-    name:Mapped[datetime]=mapped_column(default=func.now())
+    phone: Mapped[str]=mapped_column(nullable=False)
+    name: Mapped[str]=mapped_column(nullable=False)
+    email:Mapped[str | None]
+    comment:Mapped[str | None]
+
     order_status :Mapped[Statuses]
 
     pizza = relationship('Pizza', secondary=order_pizza_association, back_populates='orders')
