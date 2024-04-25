@@ -1,5 +1,5 @@
 
-from sqlalchemy import Column,Integer,ForeignKey,Table, String, ARRAY
+from sqlalchemy import Column,Integer,ForeignKey,Table, String, ARRAY, Sequence
 from sqlalchemy.orm import relationship, declarative_base, Mapped, mapped_column
 import enum
 from typing import List
@@ -20,6 +20,7 @@ class Pizza(Base):
     price:Mapped[float]
     description:Mapped[str | None]=mapped_column(nullable=True)
     image: Mapped[str]
+    pastry:Mapped[str]=mapped_column(ARRAY(String))
     sizes: Mapped[str]=mapped_column(ARRAY(String))
     rating:Mapped[int]=mapped_column(nullable=True)
     category_name= Column(String, ForeignKey("category.title"))
@@ -53,8 +54,8 @@ class Order(Base):
     id : Mapped[int]=mapped_column(primary_key=True)
     phone: Mapped[str]=mapped_column(nullable=False)
     name: Mapped[str]=mapped_column(nullable=False)
-    email:Mapped[str | None]
-    comment:Mapped[str | None]
+    email:Mapped[str | None]=mapped_column(nullable=True)
+    comment:Mapped[str | None]=mapped_column(nullable=True)
 
     order_status :Mapped[Statuses]
 
