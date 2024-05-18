@@ -21,6 +21,7 @@
     line-height: 33px;
     letter-spacing: 1%;
     text-transform: uppercase;
+    text-decoration: none;
 }
 .header__text {
     color: rgb(123, 123, 123);
@@ -33,7 +34,7 @@
     display: flex;
 }
 .header__info {
-    margin-left: 17px;
+    margin-left: 32px;
 }
 .header__img {
     display: flex;
@@ -48,6 +49,7 @@
     border: 0px;
     border-radius: 30px;
     background: rgb(254, 95, 30);
+    text-decoration: none;
 }
 .header__price {
     margin-right: 13px;
@@ -265,7 +267,7 @@
     column-gap: 7px;
 
     & li {
-		user-select: none;
+        user-select: none;
         width: 131.88px;
         height: 32px;
         display: flex;
@@ -285,7 +287,7 @@
     align-items: center;
     margin-top: 7px;
     column-gap: 7px;
-	user-select: none;
+    user-select: none;
     & li {
         display: flex;
         justify-content: center;

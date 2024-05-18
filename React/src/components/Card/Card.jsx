@@ -1,13 +1,10 @@
-import plus from '../../assets/plus.svg';
-import pizzaChiz from '../../assets/pizza-chiz.png';
 import { useState } from 'react';
-import pizzas from '../../assets/pizzas.json';
 
-export default function Card({ title, price, image, sizes, types }) {
-    const typesAr = ['Тонкое', 'Традиционное'];
+export default function Card({ pizzaname, price, image, sizes, types }) {
     const [selectType, setSelectType] = useState('');
     const [selectSize, setSelectSize] = useState('');
     const [addPizza, setAddPizza] = useState(0);
+
     const addButton = () => {
         setAddPizza(addPizza + 1);
     };
@@ -18,35 +15,29 @@ export default function Card({ title, price, image, sizes, types }) {
             setSelectType(index);
         }
     };
-	const pickSize = (index) => 
-	{
-		if (selectSize === index) {
-			setSelectSize(null)
-		}
-		else 
-		{
-			setSelectSize(index)
-		}
-	}
+    const pickSize = (index) => {
+        if (selectSize === index) {
+            setSelectSize(null);
+        } else {
+            setSelectSize(index);
+        }
+    };
     return (
         <div className="card">
             <img src={image} alt="" />
-            <div className="card__title">{title}</div>
+            <div className="card__title">{pizzaname}</div>
             <div className="card__param">
                 <ul className="card__dough">
                     {types.map((type) => (
                         <li key={type} onClick={() => pickType(type)} className={selectType === type ? 'selected' : ''}>
-                            {typesAr[type]}
+                            {type}
                         </li>
                     ))}
                 </ul>
 
                 <ul className="card__diameter">
                     {sizes.map((size) => (
-                        <li
-                            key={size}
-                            onClick={() => pickSize(size)}
-                            className={selectSize === size ? 'selected' : ''}>
+                        <li key={size} onClick={() => pickSize(size)} className={selectSize === size ? 'selected' : ''}>
                             {size} см
                         </li>
                     ))}

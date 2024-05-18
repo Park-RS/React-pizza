@@ -1,0 +1,130 @@
+.ellipse {
+    cursor: pointer;
+}
+.cart {
+}
+.container {
+    max-width: 821px;
+    margin: 94px auto 0px;
+}
+.head {
+    display: flex;
+    justify-content: space-between;
+}
+.title {
+    display: flex;
+    h2 {
+        margin-left: 17px;
+        color: rgb(0, 0, 0);
+        font-family: Nunito;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 44px;
+        letter-spacing: 1%;
+        text-align: left;
+    }
+}
+.clear {
+    width: 169px;
+    display: flex;
+    & h5 {
+        color: rgb(182, 182, 182);
+        font-family: Nunito;
+        font-size: 16px;
+        line-height: 22px;
+    }
+}
+
+.item__line {
+    margin-top: 17px;
+    width: 820px;
+    height: 1px;
+    background: rgb(244, 244, 244);
+}
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    border-top: 1px solid rgb(244, 244, 244);
+    height: 111px;
+}
+.name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 15px;
+    h4 {
+        color: rgb(0, 0, 0);
+        font-family: Nunito;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 30px;
+    }
+    span {
+        color: rgb(141, 141, 141);
+        font-family: Nunito;
+        font-size: 18px;
+        line-height: 25px;
+    }
+}
+.ellipse {
+}
+.counter {
+    color: rgb(0, 0, 0);
+    font-family: Nunito;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 30px;
+}
+.info {
+    display: flex;
+    justify-content: space-between;
+    color: rgb(0, 0, 0);
+    font-family: Nunito;
+    font-size: 22px;
+    line-height: 30px;
+    margin-top: 40px;
+    & span {
+        font-weight: 700;
+    }
+}
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 37px;
+
+    & button {
+        cursor: pointer;
+
+        width: 211px;
+        height: 55px;
+        border: 0px;
+        border-radius: 30px;
+        background: rgb(254, 95, 30);
+        color: rgb(255, 255, 255);
+        font-family: Nunito;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 22px;
+    }
+    & a {
+        cursor: pointer;
+
+        color: rgb(255, 255, 255);
+        font-family: Nunito;
+        font-size: 16px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+}
+.price {
+    color: rgb(0, 0, 0);
+    font-family: Nunito;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 30px;
+}
