@@ -1,14 +1,17 @@
 import triangle from '../../assets/triangle.svg';
 import React from 'react';
 
-export default function Sort(params) {
+export default function Sort({ value, onChangeSort }) {
     const [open, setOpen] = React.useState(false);
-    const [selected, setSelected] = React.useState(0);
-    const sortList = ['популярности', 'цене', 'алфавиту'];
-    function setItem(index) {
-        setSelected(index);
+    const sortList = [
+        { name: 'популярности', sort: 'rating' },
+        { name: 'цене', sort: 'price' },
+        { name: 'алфавиту', sort: 'pizzaname' },
+    ];
+    const setItem = (index) => {
+        onChangeSort(index);
         setOpen(false);
-    }
+    };
 
     return (
         <div className="sort__variables">
@@ -16,17 +19,17 @@ export default function Sort(params) {
                 <img src={triangle} alt="" />
             </div>
             <div className="sort__text">
-                Сортировка по: <span onClick={() => setOpen(!open)}>{sortList[selected]}</span>
+                Сортировка по: <span onClick={() => setOpen(!open)}>{value.name}</span>
             </div>
             {open && (
                 <div className="sort__popup">
                     <ul>
-                        {sortList.map((item, index) => (
+                        {sortList.map((obj, index) => (
                             <li
-                                onClick={() => setItem(index)}
+                                onClick={() => setItem(obj)}
                                 key={index}
-                                className={selected === index ? 'choosen' : ''}>
-                                {item}
+                                className={value.sort === obj.sort ? 'choosen' : ''}>
+                                {obj.name}
                             </li>
                         ))}
                     </ul>

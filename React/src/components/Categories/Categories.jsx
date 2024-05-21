@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Sort from '../Sort/Sort';
-export default function Categories(params) {
-    const [activeIndex, setActiveIndex] = useState(0);
+export default function Categories({ value, onClickCategory }) {
+    console.log(value);
 
     const categories = ['Все', 'Мясная', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
     function chooseCategory(index) {
@@ -13,16 +13,15 @@ export default function Categories(params) {
             <div className="container">
                 <div className="sort__inner">
                     <ul className="sort__buttons">
-                        {categories.map((value, index) => (
+                        {categories.map((categoryName, index) => (
                             <li
                                 key={index}
-                                onClick={() => chooseCategory(index)}
-                                className={activeIndex === index ? 'active' : ''}>
-                                {value}
+                                onClick={() => onClickCategory(index)}
+                                className={value === index ? 'active' : ''}>
+                                {categoryName}
                             </li>
                         ))}
                     </ul>
-                    <Sort></Sort>
                 </div>
             </div>
         </div>
