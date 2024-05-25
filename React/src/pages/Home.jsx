@@ -4,7 +4,7 @@ import Categories from '../components/Categories/Categories';
 import Card from '../components/Card/Card';
 import Skeleton from '../components/Skeleton/Skeleton';
 import Sort from '../components/Sort/Sort';
-export const Home = () => {
+export const Home = ({ searchValue }) => {
     const [selected, setSelected] = React.useState(0);
 
     const [items, setItems] = React.useState([]);
@@ -13,10 +13,10 @@ export const Home = () => {
     const [sort, setSort] = React.useState({
         name: 'популярности',
         sort: 'rating',
-    }
-);
+    });
 
     React.useEffect(() => {
+		// const search = searchValue ? `&search=${searchValue} : '' `
         setIsLoading(true);
         if (categoryId == 0) {
             fetch(`https://fastapi-pizza-delivery.onrender.com/pizzas/?sort_by=${sort.sort}&order=asc`)
@@ -39,7 +39,18 @@ export const Home = () => {
                 });
             window.scrollTo(0, 0);
         }
-    }, [categoryId, sort]);
+    }, [categoryId, sort, searchValue]);
+
+    const pizzas = items
+        .filter((obj) => {
+            if (obj.pizzaname.toLowerCase().includes(searchValue.toLowerCase())) {
+                return true;
+            }
+            return false;
+        })
+        .map((obj) => <Card key={obj.id} {...obj} />);
+    const skeletons = [...new Array(10)].map((_, index) => <Skeleton key={index} />);
+
     return (
         <>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '30px' }}>
@@ -48,11 +59,7 @@ export const Home = () => {
             </div>
 
             <h1 className="pizza__title">Все пиццы</h1>
-            <div className="pizza__inner">
-                {isLoading
-                    ? [...new Array(10)].map((_, index) => <Skeleton key={index} />)
-                    : items.map((obj) => <Card key={obj.id} {...obj} />)}
-            </div>
+            <div className="pizza__inner">{isLoading ? skeletons : pizzas}</div>
         </>
     );
 };

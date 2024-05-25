@@ -6,10 +6,21 @@ import cart from '../../assets/cart-in-cart.svg';
 import trash from '../../assets/trash.svg';
 import path from '../../assets/path.svg';
 import pizzaTest from '../../assets/pizza_test.png';
+import { CartItem } from '../../components/CartItem';
 
 import styles from './Cart.module.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { clearItems } from '../../redux/slices/cartSlice';
 
 export const Cart = () => {
+    const dispatch = useDispatch();
+    const onClickClear = () => {
+        dispatch(clearItems());
+    };
+
+    const { totalPrice, items } = useSelector((state) => state.cart);
+    const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+
     return (
         <div className={styles.cart}>
             <div className={styles.container}>
@@ -19,48 +30,26 @@ export const Cart = () => {
                         <h2>Корзина</h2>
                     </div>
                     <div className={styles.clear}>
-                        <img src={trash} alt="" />
+                        <img onClick={onClickClear} src={trash} alt="" />
                         <h5>Очистить корзину</h5>
                     </div>
                 </div>
                 <ul>
-                    <li className={styles.item}>
-                        <img src={pizzaTest} alt="" />
-                        <div className={styles.name}>
-                            <h4>Сырный цыпленок</h4>
-                            <span>тонкое тесто, 26 см.</span>
-                        </div>
-                        <img src={minus} className={styles.ellipse}></img>
-                        <h4 className={styles.counter}>2</h4>
-                        <img src={plus} className={styles.ellipse}></img>
-                        <h4 className={styles.price}>770 ₽</h4>
-
-                        <img src={cancel} className={styles.ellipse} alt="" />
-                    </li>
-                    <li className={styles.item}>
-                        <img src={pizzaTest} alt="" />
-                        <div className={styles.name}>
-                            <h4>Сырный цыпленок</h4>
-                            <span>тонкое тесто, 26 см.</span>
-                        </div>
-                        <img src={minus} className={styles.ellipse}></img>
-                        <h4 className={styles.counter}>2</h4>
-                        <img src={plus} className={styles.ellipse}></img>
-                        <h4 className={styles.price}>770 ₽</h4>
-
-                        <img src={cancel} className={styles.ellipse} alt="" />
-                    </li>
+                    {items.map((item) => (
+                        <CartItem key={item.id} {...item} />
+                    ))}
                 </ul>
                 <div className={styles.info}>
                     <div>
-                        Всего пицц: <span>3 шт.</span>
+                        Всего пицц: <span>{totalCount} шт.</span>
+                        
                     </div>
                     <div>
-                        Сумма заказа: <span>900 ₽</span>
+                        Сумма заказа: <span>{totalPrice} ₽</span>
                     </div>
                 </div>
                 <div className={styles.actions}>
-                    <button >
+                    <button>
                         <a href="/"> Вернуться назад</a>
                     </button>
                     <button>Оплатить сейчас</button>

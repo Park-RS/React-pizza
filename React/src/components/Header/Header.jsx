@@ -1,8 +1,13 @@
 import image1 from '../../assets/image1.svg';
 import cart from '../../assets/cart.svg';
+import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
-export default function Header(params) {
+
+import { Search } from '../Search';
+export default function Header({ searchValue, setSearchValue }) {
+	const { items, totalPrice } = useSelector((state) => state.cart);
+    const totalCount = items.reduce((sum, item) => sum + item.count, 0);
     return (
         <header className="header">
             <div className="container">
@@ -18,11 +23,12 @@ export default function Header(params) {
                             <p className="header__text">самая вкусная пицца во вселенной</p>
                         </div>
                     </div>
+                    {/* <Search searchValue={searchValue} setSearchValue={setSearchValue} /> */}
                     <Link to="/cart" className="header__button">
-                        <div className="header__price">520 ₽</div>
+                        <div className="header__price">{totalPrice} ₽</div>
                         <div className="header__rectangle"></div>
                         <img className="header__cart" src={cart} alt="dasda" />
-                        <div className="header__count">3</div>
+                        <div className="header__count">{totalCount}</div>
                     </Link>
                 </div>
             </div>
