@@ -1,20 +1,49 @@
 from pydantic import BaseModel
 from typing import Optional, List
+from dataclasses import dataclass
+from fastapi import UploadFile, File, Form
 
 class OrderModel(BaseModel):
-    id:Optional[int]
-    order_status:Optional[str]="IN-PROCESS"
+    phone: str="79538914495"
+    name: str
+    email:Optional[str|None]= None
+    comment:Optional[str|None ]= None
+    order_status:str="inprocess"
     pizza:List[str]
+    
+    
+    class Config:
+        orm_mode=True
 
 
-class PizzaModel(BaseModel):
-    id:Optional[int]
+@dataclass
+class PizzaModel:
+    pizzaname:str=Form(...)
+    price:float=Form(...)
+    description:str|None=Form(...)
+    image:UploadFile= File(...)
+    pastry:List[str]=Form(...)
+    sizes:List[str]=Form(...)
+    category_name:str=Form(...)
+
+
+class PizzaInfo(BaseModel):
     pizzaname:str
-    price:Optional[int]
-    description:str
+    price:float
+    description:str|None
+    image:str
+    pastry:List[str]
+    sizes:List[str]
+    rating:Optional[int]=None
+    category_name:str
+    
+    class Config:
+        orm_mode=True
     
 
 class OrderStatusModel(BaseModel):
-    order_status:Optional[str]="IN-PROCESS"
+    order_status:Optional[str]
 
     
+class CategoryModel(BaseModel):
+    title:str

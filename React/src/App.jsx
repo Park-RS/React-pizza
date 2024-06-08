@@ -1,23 +1,24 @@
 import './App.scss';
-import Categories from './components/Categories/Categories';
+import React from 'react';
 import Header from './components/Header/Header';
-import Card from './components/Card/Card';
-import pizzas from './assets/pizzas.json';
+import { Home } from './pages/Home';
+import { NotFound } from './pages/NotFound';
+import { Routes, Route } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Cart } from './pages/Cart/Cart';
+
 function App() {
+    const [searchValue, setSearchValue] = React.useState('');
     return (
         <div className="wrapper">
-            <Header />
-            <Categories></Categories>
             <main className="pizza">
                 <div className="container">
-                    <h1 className="pizza__title">Все пиццы</h1>
-                    <div className="pizza__inner">
-                        {pizzas.map((obj) => (
-                            <Card {...obj}></Card>
-                        ))}
-
-                      
-                    </div>
+                    <Header searchValue={searchValue} setSearchValue={setSearchValue} />
+                    <Routes>
+                        <Route path="/" element={<Home searchValue={searchValue} />}  />
+                        <Route path="/cart" element={<Cart />} />
+                        <Route path="*" element={<NotFound />} />
+                    </Routes>
                 </div>
             </main>
         </div>
